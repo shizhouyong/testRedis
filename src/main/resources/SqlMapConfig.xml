@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!-- 全局setting配置，根据需要添加 -->
+
     <!--<settings>
         &lt;!&ndash; 这个配置使全局的映射器启用或禁用缓存 &ndash;&gt;
         <setting name="cacheEnabled" value="true" />

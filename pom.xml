@@ -106,11 +106,11 @@
       <version>5.1.30</version>
     </dependency>
     <!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
-    <dependency>
+    <!--    <dependency>
       <groupId>commons-dbcp</groupId>
       <artifactId>commons-dbcp</artifactId>
       <version>1.2.2</version>
-    </dependency>
+    </dependency>-->
     <!-- 导入druid的jar包，用来在applicationContext.xml中配置数据库 -->
     <dependency>
       <groupId>com.alibaba</groupId>
@@ -238,11 +238,11 @@
       <artifactId>commons-pool</artifactId>
       <version>1.6</version>
     </dependency>
-    <!-- <dependency>
+    <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-validator</artifactId>
         <version>4.2.0.Final</version>
-    </dependency>  -->
+    </dependency>
   </dependencies>
 
 

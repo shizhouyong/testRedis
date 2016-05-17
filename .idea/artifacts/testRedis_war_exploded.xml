@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="testRedis:war exploded">
-    <output-path>$PROJECT_DIR$/target/testRedis</output-path>
+    <output-path>D:/Program Files/apache-tomcat-8.0.32/webapps/testRedis</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">

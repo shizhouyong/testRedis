@@ -1,11 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-		http://www.springframework.org/schema/mvc
-		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/aop
@@ -15,8 +15,11 @@
 
     <!-- 加载db.properties文件中的内容，db.properties文件中key命名要有一定的特殊规则 -->
     <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="true"/>
+    <!-- 自动扫描注解的mapper -->
     <context:component-scan base-package="com.szy.mapper"/>
-    <!-- 配置数据源 ，dbcp -->
+    <!-- 自动扫描注解的bean -->
+    <context:component-scan base-package="com.szy.service" />
+    <!-- 配置数据源,dbcp -->
 
     <!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
         destroy-method="close">
@@ -56,7 +59,7 @@
         <!-- 加载mybatis的全局配置文件 -->
         <property name="configLocation" value="classpath:SqlMapConfig.xml" />
         <!-- mapper.xml扫描-->
-       <property name="mapperLocations" value="classpath*:com/szy/mapper/*Mapper.xml"/>
+        <property name="mapperLocations" value="classpath*:com/szy/mapper/*Mapper.xml"/>
 
     </bean>
     <!-- mapper扫描器 -->
@@ -66,6 +69,33 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 
+    <bean id="userService" class="com.szy.service.impl.UserServiceImpl"/>
+
+
+    <!-- 事务管理器对mybatis操作数据库事务控制，spring使用jdbc的事务控制类 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 通知 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 传播行为 -->
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- aop -->
+    <aop:config>
+        <!-- 其中第一个*代表返回值，第二*代表service下子包，第三个*代表方法名，“（..）”代表方法参数。 -->
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.szy.service.*.*.*(..))"/>
+    </aop:config>
 
 
 </beans>

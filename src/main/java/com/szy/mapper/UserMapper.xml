@@ -3,8 +3,8 @@
 <mapper namespace="com.szy.mapper.UserMapper">
 
     <!--查询所有-->
-    <select id="findUserList"  resultType="com.szy.po.User">
-        select * from user
+    <select id="findUsers"  resultType="com.szy.po.User">
+         select * from user
     </select>
 
 
