@@ -2,10 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.szy.mapper.UserMapper">
 
-    <!--查询所有-->
+    <cache type="com.szy.cache.LoggingRedisCache" />
+
     <select id="findUsers"  resultType="com.szy.po.User">
          select * from user
     </select>
+
+    <select id="findUser" resultMap="UsersResultMap">
+        select * from user
+    </select>
+    <!-- 定义一个ResultMap -->
+    <resultMap type="com.szy.po.User" id="UsersResultMap">
+        <!-- 配置User信息 -->
+        <id column="uid" property="uid" />
+        <result column="uname" property="uname" />
+        <result column="email" property="email" />
+        <result column="pwd" property="pwd" />
+        <result column="registertime" property="registertime" />
+        <result column="jurisdiction" property="jurisdiction" />
+        <result column="state" property="state" />
+        <result column="code" property="code" />
+        <!-- 配置映射的关联的用户信息
+             association:用于映射关联查询单个对象信息
+             property：要将关联查询的用户信息映射到Oraders中哪一个属性
+             javaType:映射到Oraders属性的类型
+        -->
+       <!-- <association property="user" javaType="cn.mybatis.pojo.User">
+            &lt;!&ndash; 关联查询用户的唯一标识
+                 column： 指定唯一标识用户信息的列
+                 property：映射到User的哪个属性
+            &ndash;&gt;
+            <id column="user_id" property="id" />
+            <result column="username" property="username" />
+            <result column="sex" property="sex" />
+            <result column="address" property="address" />
+        </association>-->
+    </resultMap>
 
 
 </mapper>

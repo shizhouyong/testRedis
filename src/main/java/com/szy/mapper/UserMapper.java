@@ -13,4 +13,6 @@ public interface UserMapper {
 
     public List<User> findUsers() throws Exception;
 
+    public List<User> findUser() throws Exception;
+
 }

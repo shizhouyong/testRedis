@@ -22,5 +22,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.findUsers();
     }
 
+    public List<User> findUser() throws Exception{
+        return userMapper.findUser();
+    }
+
 
 }

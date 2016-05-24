@@ -11,7 +11,7 @@
     </listener>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:Application.xml</param-value>
+        <param-value>classpath:ApplicationContext.xml</param-value>
     </context-param>
 
     <!-- springmvc前端控制器 -->

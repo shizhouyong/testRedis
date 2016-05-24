@@ -1,11 +1,12 @@
 package com.szy.po;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * Created by szy on 2016/5/14.
  */
-public class User {
+public class User implements Serializable{
 
     private Integer uid;
     private String code;

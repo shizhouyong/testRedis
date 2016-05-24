@@ -11,4 +11,7 @@ import java.util.List;
 public interface UserService {
 
     public List<User> findUserList() throws Exception;
+
+    public List<User> findUser() throws Exception;
+
 }

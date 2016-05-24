@@ -23,7 +23,8 @@ public class UserController {
     @RequestMapping("/queryUser")
     public ModelAndView queryUser() throws Exception {
 
-        List<User> userList = userService.findUserList();
+        /*List<User> userList = userService.findUserList();*/
+        List<User> userList = userService.findUser();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userList", userList);
         modelAndView.setViewName("user/userList");
